@@ -42,4 +42,8 @@ public class UserDaoService {
     }
 
 
+    public void deleteById(Long id) {
+        User user = findById(id);
+        users.remove(user);
+    }
 }

@@ -40,5 +40,10 @@ public class UserController {
         return userDaoService.findById(id);
     }
 
+    @DeleteMapping("/users/{id}")
+    public void deleteUser(@PathVariable("id") Long id) {
+        userDaoService.deleteById(id);
+    }
+
 
 }
