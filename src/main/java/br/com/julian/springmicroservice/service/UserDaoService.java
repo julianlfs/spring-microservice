@@ -41,7 +41,6 @@ public class UserDaoService {
                 .orElseThrow(() -> new UserNotFound("user not found"));
     }
 
-
     public void deleteById(Long id) {
         User user = findById(id);
         users.remove(user);
