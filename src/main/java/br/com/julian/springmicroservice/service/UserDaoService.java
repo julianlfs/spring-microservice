@@ -1,5 +1,6 @@
 package br.com.julian.springmicroservice.service;
 
+import br.com.julian.springmicroservice.exception.UserNotFound;
 import br.com.julian.springmicroservice.model.User;
 import org.springframework.stereotype.Component;
 
@@ -37,7 +38,7 @@ public class UserDaoService {
         return users.stream()
                 .filter( (u) -> u.getId().equals(id))
                 .findAny()
-                .orElse(null);
+                .orElseThrow(() -> new UserNotFound("user not found"));
     }
 
 
