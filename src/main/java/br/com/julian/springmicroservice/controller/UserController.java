@@ -3,8 +3,8 @@ package br.com.julian.springmicroservice.controller;
 import br.com.julian.springmicroservice.model.User;
 import br.com.julian.springmicroservice.service.UserDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -13,8 +13,8 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
 public class UserController {
@@ -42,15 +42,19 @@ public class UserController {
     }
 
     @GetMapping("users/{id}")
-    public EntityModel<User> findOne(@PathVariable("id") Long id) {
+    public Resource<User> findOne(@PathVariable("id") Long id) {
 
         User user = userDaoService.findById(id);
 
-        EntityModel<User> model = new EntityModel<User>(user);
-        WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).getAll());
-        model.add(linkTo.withRel("all-users"));
+        //EntityModel<User> model = new EntityModel<User>(user);
+        //WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).getAll());
+        //model.add(linkTo.withRel("all-users"));
 
-        return model;
+        Resource<User> resource = new Resource<User>(user);
+        ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).getAll());
+        resource.add(linkTo.withRel("all-users"));
+
+        return resource;
     }
 
     @DeleteMapping("/users/{id}")
