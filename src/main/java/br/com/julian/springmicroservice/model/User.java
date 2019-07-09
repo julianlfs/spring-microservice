@@ -1,9 +1,13 @@
 package br.com.julian.springmicroservice.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
+@ApiModel(description = "all details abou the user")
 public class User {
 
     private Long id;
@@ -12,6 +16,7 @@ public class User {
     private String name;
 
     @Past
+    @ApiModelProperty(notes = "Cannot be in the future")
     private LocalDate birth;
 
     public User() {
