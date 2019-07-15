@@ -1,14 +1,13 @@
 package br.com.julian.springmicroservice.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFilter;
 
+@JsonFilter("SomeBeanFilter")
 public class SomeBean {
 
     private String field1;
     private String field2;
-
-    @JsonIgnore
     private String field3;
 
 
